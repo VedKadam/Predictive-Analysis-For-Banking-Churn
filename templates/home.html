@@ -1,0 +1,133 @@
+<html>
+<head>
+<title>Churn Prediction</title>
+<style>
+    body {
+        background: linear-gradient(to right, #ec6f66, #f3a183);
+    }
+
+    input[type="number"] {
+        font-size: 15px;
+        border-radius: 5px;
+        padding: 0.2%;
+        border: 2px solid #ec6f66;
+    }
+
+    #btn {
+        font-size: 18px;
+        padding: 0.2%;
+        background-color: #ffc3a0;
+        border-radius: 8px;
+    }
+
+    #btn:hover {
+        background-color: #ff512f;
+        color: white;
+    }
+
+    #ans {
+        font-size: 35px;
+        width: 50%;
+        background-image: linear-gradient(to top, #feada6 0%, #f5efef 100%);
+    }
+	
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+    function check() {
+        let id = document.getElementById("id");
+        let cs = document.getElementById("cs");
+        let country = document.getElementById("country");
+        let gender = document.querySelector('input[name="gender"]:checked');
+        let age = document.getElementById("age");
+        let ten = document.getElementById("ten");
+        let bal = document.getElementById("bal");
+        let pno = document.getElementById("pno");
+        let cc = document.getElementById("cc");
+        let am = document.getElementById("am");
+        let sal = document.getElementById("sal");
+        let ans = document.getElementById("ans");
+
+        if (
+            id.value === "" ||
+            cs.value === "" ||
+            country.value === "" ||
+            gender === null ||
+            age.value === "" ||
+            ten.value === "" ||
+            bal.value === "" ||
+            pno.value === "" ||
+            cc.value === "" ||
+            am.value === "" ||
+            sal.value === ""
+        ) {
+            alert("Please fill in all the fields.");
+            ans.innerHTML = "";
+            id.focus();
+            return false;
+        } else if (
+            parseFloat(id.value) < 0 ||
+            parseFloat(cs.value) < 0 ||
+            parseInt(country.value) < 0 ||
+            parseInt(gender.value) < 0 ||
+            parseFloat(age.value) < 0 ||
+            parseFloat(ten.value) < 0 ||
+            parseFloat(bal.value) < 0 ||
+            parseFloat(pno.value) < 0 ||
+            parseFloat(cc.value) < 0 ||
+            parseFloat(am.value) < 0 ||
+            parseFloat(sal.value) < 0
+        ) {
+            alert("Minimum value should be 0");
+            ans.innerHTML = "";
+            id.focus();
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
+</head>
+<body>
+<center>
+    <h1>Predictive Analysis For Banking Churn </h1>
+    <form method="POST" onsubmit="return check()">
+        <input type="number" step="any" id="id" name="id" placeholder="Enter Customer Id" />
+        <br/><br/>
+        <input type="number" step="any" id="cs" name="cs" placeholder="Enter Credit Score" />
+        <br/><br/>
+        <label for="country">Country:</label>
+        <select id="country" name="country" required>
+            <option value="1">France</option>
+            <option value="2">Germany</option>
+            <option value="3">Spain</option>
+        </select>
+        <br/><br/>
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="1"> Female
+        <input type="radio" name="gender" value="2"> Male
+        <br/><br/>
+        <input type="number" step="any" id="age" name="age" placeholder="Enter Age" />
+        <br/><br/>
+        <input type="number" step="any" id="ten" name="ten" placeholder="Enter Tenure" />
+        <br/><br/>
+        <input type="number" step="any" id="bal" name="bal" placeholder="Enter Balance" />
+        <br/><br/>
+        <input type="number" step="any" id="pno" name="pno" placeholder="Enter Product Number" />
+        <br/><br/>
+	<label for="yes">(1 for Yes, 0 for No)</label>
+	<br/>
+        <input type="number" step="any" id="cc" name="cc" placeholder="Do you use Credit Card " min="0" max="1" /> 
+        <br/><br/>
+	<label for="yes">(1 for Yes, 0 for No)</label>
+	<br/>
+        <input type="number" step="any" id="am" name="am" placeholder="Are you an active member" />
+        <br/><br/>
+        <input type="number" step="any" id="sal" name="sal" placeholder="Enter Salary" />
+	<br/>	<br/>
+	<input type="submit" value="Predict Churn" id="btn" />
+	</form>
+	<h2 id="ans"> {{ msg }} </h2>
+</center>
+</body>
+</html>
